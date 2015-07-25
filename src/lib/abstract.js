@@ -49,7 +49,7 @@ export const abstractComponentClass = Parent =>
 
 export class AbstractHandler extends abstractComponentClass(HandleableBuilder) {
   toMainHandleableBuilder() {
-    return this.concreteComponent.toHandleableBuilder
+    return this.concreteComponent.toHandleableBuilder()
   }
 
   validateImpl(component) {
@@ -59,7 +59,7 @@ export class AbstractHandler extends abstractComponentClass(HandleableBuilder) {
 
 export class AbstractMiddleware extends abstractComponentClass(HandleableMiddleware) {
   toMainHandleableMiddleware() {
-    return this.concreteComponent.toHandleableMiddleware
+    return this.concreteComponent.toHandleableMiddleware()
   }
 
   validateImpl(component) {

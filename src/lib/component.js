@@ -1,5 +1,12 @@
-import { MapNodeWithElement } from 'quiver-graph'
+import { MapNode, MapNodeWithElement } from 'quiver-graph'
+
+import { nodesToComponents } from './util/map'
 import { assertIsComponent, assertIsActivated } from './util/assert'
+
+const $subComponents = Symbol('@subComponents')
+const subComponentNode = function() {
+  return this.graph.getNode($subComponents)
+}
 
 export class Component {
   constructor(opts={}) {
@@ -21,19 +28,33 @@ export class Component {
   }
 
   activate() {
-    return new MapNodeWithElement({
+    const node = new MapNodeWithElement({
       element: this
-    }).transpose()
+    })
+
+    node.setNode($subComponents, new MapNode())
+    return node.transpose()
+  }
+
+  export() {
+    assertIsActivated(this)
+    return () =>
+      deepClone(this.graph).transpose()
+  }
+
+  subComponents() {
+    const subNodes = this::subComponentNode().subNodes()
+    return nodesToComponents(subNodes)
   }
 
   getSubComponent(name) {
-    const node = this.graph.getNode(name)
+    const node = this::subComponentNode().getNode(name)
     return node ? node.transpose() : null
   }
 
   setSubComponent(name, component) {
     assertIsComponent(component)
-    this.graph.setNode(name, component)
+    this::subComponentNode().setNode(name, component)
     return this
   }
 

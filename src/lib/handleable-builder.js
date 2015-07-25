@@ -1,11 +1,9 @@
-import { mixin } from 'quiver-object'
-
 import { Component } from './component'
-import { MiddlewareMixin } from './middleware-mixin'
+import { ExtensibleComponent } from './extensible-component'
 
 const $handleableBuilder = Symbol('@handleableBuilder')
 
-export class HandleableBuilder extends Component {
+export class HandleableBuilder extends ExtensibleComponent {
   constructor(opts={}) {
     const { handleableBuilder=null } = opts
     super(opts)
@@ -35,5 +33,3 @@ export class HandleableBuilder extends Component {
     return 'HandleableBuilder'
   }
 }
-
-mixin(HandleableBuilder.prototype, MiddlewareMixin)
