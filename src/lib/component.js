@@ -1,9 +1,5 @@
 import { MapNodeWithElement } from 'quiver-graph'
-
-const assertNotActivated = () => {
-  throw new Error('Component is not activated. ' +
-    'connect with graphNode to start using it.')
-}
+import { assertIsComponent, assertIsActivated } from './util/assert'
 
 export class Component {
   constructor(opts={}) {
@@ -15,25 +11,56 @@ export class Component {
   }
 
   get graph() {
-    assertNotActivated()
+    assertIsActivated(this)
+    return this.graphNode
   }
 
   get element() {
-    assertNotActivated()
+    assertIsActivated(this)
+    return this.graphElement
   }
 
   activate() {
-    const node = new MapNode({
+    return new MapNodeWithElement({
       element: this
-    })
-
-    return node.transpose()
+    }).transpose()
   }
 
   getSubComponent(name) {
     const node = this.graph.getNode(name)
-    if(!node) return null
+    return node ? node.transpose() : null
+  }
 
-    return node.transpose()
+  setSubComponent(name, component) {
+    assertIsComponent(component)
+    this.graph.setNode(name, component)
+    return this
+  }
+
+  getMeta(key) {
+    return this.graph.meta.get(key)
+  }
+
+  setMeta(key, value) {
+    this.graph.meta.set(value)
+    return this
+  }
+
+  get name() {
+    return this.getMeta('name')
+  }
+
+  setName(name) {
+    this.setMeta('name', name)
+    return this
+  }
+
+  get namespace() {
+    return this.getMeta('namespace')
+  }
+
+  setNamespace(namespace) {
+    this.setMeta('namespace', namespace)
+    return this
   }
 }

@@ -1,6 +1,6 @@
-import { map } from 'quiver-iterator'
+import { map } from 'quiver-util/iterator'
 import { ListNode } from 'quiver-graph'
-import { assertMiddlewareComponent } from './util'
+import { assertIsMiddlewareComponent } from './util/assert'
 
 export const MiddlewareMixin = {
   middlewareNode() {
@@ -23,8 +23,8 @@ export const MiddlewareMixin = {
   }
 
   middlewareComponents() {
-    return this.middlewareNode().subNodes()::map(
-      node => node.transpose())
+    return this.middlewareNode().subNodes()
+      ::map(node => node.transpose())
   }
 
   toExtendMiddleware() {
