@@ -1,5 +1,5 @@
 import { ExtensibleComponent } from './extensible-component'
-import { combineBuilderWithMiddleware } from './util/combinator'
+import { combineBuilderWithMiddleware } from '../util/combinator'
 
 const $handleableBuilder = Symbol('@handleableBuilder')
 

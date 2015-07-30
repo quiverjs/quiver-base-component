@@ -1,8 +1,9 @@
+import { map } from 'quiver-util/iterator'
 import { MapNode, MapNodeWithElement } from 'quiver-graph'
 
-import { nodesToComponents } from './util/map'
-import { assertIsComponent, assertIsActivated } from './util/assert'
+import { assertIsComponent, assertIsActivated } from '../util/assert'
 
+const $self = Symbol('@self')
 const $subComponents = Symbol('@subComponents')
 const subComponentNode = function() {
   return this.graph.getNode($subComponents)
@@ -10,7 +11,7 @@ const subComponentNode = function() {
 
 export class Component {
   constructor(opts={}) {
-
+    this[$self] = this
   }
 
   get isQuiverComponent() {
@@ -25,6 +26,10 @@ export class Component {
   get element() {
     assertIsActivated(this)
     return this.graphElement
+  }
+
+  get self() {
+    return this[$self]
   }
 
   get id() {
@@ -47,8 +52,8 @@ export class Component {
   }
 
   subComponents() {
-    const subNodes = this::subComponentNode().subNodes()
-    return nodesToComponents(subNodes)
+    this::subComponentNode().subNodes()
+      ::map(node => node.transpose())
   }
 
   getSubComponent(name) {

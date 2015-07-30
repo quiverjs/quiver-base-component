@@ -8,6 +8,6 @@ export const implComponentConstructor = (Component, method, wrapper=id) => {
     component[method] = () => wrapped
     component.implFunc = impl
 
-    return component
+    return component.activate()
   }
 }

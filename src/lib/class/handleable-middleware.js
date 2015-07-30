@@ -1,4 +1,4 @@
-import { combineMiddlewares } from './util/combinator'
+import { combineMiddlewares } from '../util/combinator'
 import { ExtensibleComponent } from './extensible-component'
 
 const $handleableMiddleware = Symbol('@handleableMiddleware')

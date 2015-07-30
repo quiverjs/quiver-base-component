@@ -12,8 +12,8 @@
     "url": "git@github.com:quiverjs/quiver-component-base.git"
   },
   "dependencies": {
-    "quiver-graph": "quiverjs/quiver-graph",
-    "quiver-util": "quiverjs/quiver-util"
+    "quiver-util": "quiverjs/quiver-util",
+    "quiver-graph": "quiverjs/quiver-graph"
   },
   "devDependencies": {
     "tape": "^4.0.1",
