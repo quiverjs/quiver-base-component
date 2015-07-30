@@ -1,4 +1,3 @@
-
 export const assertIsActivated = component => {
   if(!component.graphNode)
     throw new Error('Component is not activated. ' +

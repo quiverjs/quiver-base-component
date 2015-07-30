@@ -1,7 +1,7 @@
 import { map } from 'quiver-util/iterator'
 import { ListNode } from 'quiver-graph'
-import { nodesToComponents } from './util/map'
-import { combineMiddlewares } from './util/combinator'
+import { nodesToComponents } from '../util/map'
+import { combineMiddlewares } from '../util/combinator'
 import { assertIsMiddlewareComponent } from './util/assert'
 
 const middlewareNode = function() {
@@ -34,7 +34,7 @@ class ExtensibleComponent extends Component {
     yield* super.subComponents()
   }
 
-  toExtendMiddleware() {
+  extendMiddlewareFn() {
     const middlewareFns = this.middlewareComponents()
       ::map(component => component.toHandleableMiddleware())
 

@@ -27,6 +27,10 @@ export class Component {
     return this.graphElement
   }
 
+  get id() {
+    return this.graph.id
+  }
+
   activate() {
     const node = new MapNodeWithElement({
       element: this
