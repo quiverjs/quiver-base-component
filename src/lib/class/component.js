@@ -1,6 +1,6 @@
 import { map } from 'quiver-util/iterator'
+import { deepClone } from 'quiver-graph/util'
 import { MapNode, MapNodeWithElement } from 'quiver-graph'
-
 import { assertIsComponent, assertIsActivated } from '../util/assert'
 
 const $self = Symbol('@self')
@@ -23,12 +23,7 @@ export class Component {
     return this.graphNode
   }
 
-  get element() {
-    assertIsActivated(this)
-    return this.graphElement
-  }
-
-  get self() {
+  get rawSelf() {
     return this[$self]
   }
 
@@ -63,7 +58,7 @@ export class Component {
 
   setSubComponent(name, component) {
     assertIsComponent(component)
-    this::subComponentNode().setNode(name, component)
+    this::subComponentNode().setNode(name, component.graph)
     return this
   }
 
@@ -72,7 +67,7 @@ export class Component {
   }
 
   setMeta(key, value) {
-    this.graph.meta.set(value)
+    this.graph.meta.set(key, value)
     return this
   }
 
