@@ -6,7 +6,7 @@ import {
 } from './class'
 
 export const handleableBuilder = implComponentConstructor(
-  HandleableBuilder, 'toHandleableBuilder', safeHandler)
+  HandleableBuilder, 'mainHandleableBuilderFn', safeHandler)
 
 export const handleableMiddleware = implComponentConstructor(
-  HandleableMiddleware, 'toHandleableMiddleware', safeHandler)
+  HandleableMiddleware, 'mainHandleableMiddlewareFn', safeHandler)

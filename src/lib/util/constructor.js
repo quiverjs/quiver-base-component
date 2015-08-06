@@ -1,12 +1,12 @@
 const id = val => val
 
 export const implComponentConstructor = (Component, method, wrapper=id) => {
-  return impl => {
+  return implFn => {
     const component = new Component()
-    const wrapped = wrapper(impl)
+    const wrapped = wrapper(implFn)
 
     component[method] = () => wrapped
-    component.implFunc = impl
+    component.implFunc = implFn
 
     return component.activate()
   }

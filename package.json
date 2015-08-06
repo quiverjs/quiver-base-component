@@ -12,6 +12,7 @@
     "url": "git@github.com:quiverjs/quiver-component-base.git"
   },
   "dependencies": {
+    "quiver-promise": "^1.2.1",
     "quiver-util": "quiverjs/quiver-util",
     "quiver-graph": "quiverjs/quiver-graph"
   },
@@ -30,6 +31,6 @@
     "prepublish": "make build"
   },
   "engines": {
-    "iojs": "^2.5.0"
+    "iojs": "^3.0.0"
   }
 }

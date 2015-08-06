@@ -8,7 +8,7 @@ export class HandleableMiddleware extends ExtensibleComponent {
     const mainMiddleware = this.mainHandleableMiddlewareFn()
     const extendMiddleware = this.extendMiddlewareFn()
 
-    return combineMiddlewares([mainBuilder, extendMiddleware])
+    return combineMiddlewares([mainMiddleware, extendMiddleware])
   }
 
   mainHandleableMiddlewareFn() {

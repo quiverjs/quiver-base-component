@@ -17,13 +17,17 @@ export class ExtensibleComponent extends Component {
   }
 
   addMiddleware(middleware) {
-    assertMiddlewareComponent(middleware)
+    assertIsMiddlewareComponent(middleware)
     this::middlewareNode().appendNode(middleware.graph)
+
+    return this
   }
 
   prependMiddleware(middleware) {
-    assertMiddlewareComponent(middleware)
+    assertIsMiddlewareComponent(middleware)
     this::middlewareNode().prependNode(middleware.graph)
+    
+    return this
   }
 
   middlewareComponents() {

@@ -5,6 +5,7 @@ import { assertIsComponent, assertIsActivated } from '../util/assert'
 
 const $self = Symbol('@self')
 const $subComponents = Symbol('@subComponents')
+
 const subComponentNode = function() {
   return this.graph.getNode($subComponents)
 }
