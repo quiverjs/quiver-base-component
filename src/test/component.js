@@ -21,10 +21,14 @@ test('Component basic test', assert => {
     component.setSubComponent('foo', 'not a component'),
   'should only able to set component as subComponent.')
 
-  const fooComponent = new Component().activate()
-
   assert.equal(component.getSubComponent('foo'), null)
 
+  const rawFooComponent = new Component()
+  assert.throws(() =>
+    component.setSubComponent('foo', rawFooComponent),
+  'should only able to set activated component as subComponent.')
+
+  const fooComponent = rawFooComponent.activate()
   component.setSubComponent('foo', fooComponent)
   assert.equal(component.getSubComponent('foo'), fooComponent)
 

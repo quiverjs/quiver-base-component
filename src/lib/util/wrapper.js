@@ -1,4 +1,4 @@
-import { safePromised } from 'quiver-promise'
+import { safePromised } from 'quiver-util/promise'
 
 const assertFunction = fn => {
   if(typeof(fn) != 'function') {

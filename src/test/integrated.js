@@ -1,5 +1,7 @@
 import test from 'tape'
 
+import { asyncTest } from 'quiver-util/tape'
+
 import {
   handleableBuilder, handleableMiddleware
 } from '../lib/constructor'
@@ -23,15 +25,16 @@ test('integrated handleable builder+middleware component test', assert => {
   })
   .addMiddleware(barMiddleware)
 
-  const resultBuilder = main.handleableBuilderFn()
-
-  ;(async function() {
+  assert::asyncTest('builder function should built with middleware',
+  async function(assert) {
+    const resultBuilder = main.handleableBuilderFn()
     const handleable = await resultBuilder({
       nextCalled: 'bar'
     })
 
     assert.equal(handleable.foo, true)
     assert.equal(handleable.bar, true)
-  })()
-  .then(assert.end, assert.fail)
+  })
+
+  assert.end()
 })
