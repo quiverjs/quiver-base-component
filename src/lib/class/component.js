@@ -1,7 +1,7 @@
 import { map } from 'quiver-util/iterator'
 import { deepClone } from 'quiver-graph/util'
 import { MapNode, MapNodeWithElement } from 'quiver-graph'
-import { assertIsComponent, assertIsActivated } from '../util/assert'
+import { assertIsComponent, assertIsActivated } from 'quiver-component-util'
 
 const $self = Symbol('@self')
 const $subComponents = Symbol('@subComponents')

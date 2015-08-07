@@ -1,5 +1,6 @@
-import { implComponentConstructor } from './util/constructor'
-import { safeBuilder, safeHandler } from './util/wrapper'
+import {
+  implComponentConstructor, safeBuilder, safeHandler 
+} from 'quiver-component-util'
 
 import {
   HandleableBuilder, HandleableMiddleware

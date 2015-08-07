@@ -1,5 +1,5 @@
 import { ExtensibleComponent } from './extensible-component'
-import { combineBuilderWithMiddleware } from '../util/combinator'
+import { combineBuilderWithMiddleware } from 'quiver-component-util'
 
 const $handleableBuilder = Symbol('@handleableBuilder')
 
