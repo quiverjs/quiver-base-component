@@ -4,7 +4,7 @@ import { MapNode, MapNodeWithElement } from 'quiver-graph'
 import { assertIsComponent, assertIsActivated } from 'quiver-component-util'
 
 const $self = Symbol('@self')
-const $subComponents = Symbol('@subComponents')
+const $subComponents = Symbol.for('@quiver.graph.subComponents')
 
 const subComponentNode = function() {
   return this.graph.getNode($subComponents)

@@ -1,8 +1,6 @@
 import { combineMiddlewares } from 'quiver-component-util'
 import { ExtensibleComponent } from './extensible-component'
 
-const $handleableMiddleware = Symbol('@handleableMiddleware')
-
 export class HandleableMiddleware extends ExtensibleComponent {
   handleableMiddlewareFn() {
     const mainMiddleware = this.mainHandleableMiddlewareFn()

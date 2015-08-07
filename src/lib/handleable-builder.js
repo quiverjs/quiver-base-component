@@ -1,8 +1,6 @@
 import { ExtensibleComponent } from './extensible-component'
 import { combineBuilderWithMiddleware } from 'quiver-component-util'
 
-const $handleableBuilder = Symbol('@handleableBuilder')
-
 export class HandleableBuilder extends ExtensibleComponent {
   handleableBuilderFn() {
     const mainBuilder = this.mainHandleableBuilderFn()
