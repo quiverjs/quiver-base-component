@@ -1,5 +1,5 @@
 import test from 'tape'
-import { Component } from '../lib/class'
+import { Component } from '../lib'
 
 test('Component basic test', assert => {
   const rawComponent = new Component()
