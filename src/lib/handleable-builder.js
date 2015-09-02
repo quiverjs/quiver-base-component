@@ -1,5 +1,9 @@
+import { assertFunction } from 'quiver-util/assert'
 import { ExtensibleComponent } from './extensible-component'
-import { combineBuilderWithMiddleware } from 'quiver-component-util'
+
+import {
+  combineBuilderWithMiddleware, implComponentConstructor
+} from 'quiver-component-util'
 
 export class HandleableBuilder extends ExtensibleComponent {
   handleableBuilderFn() {
@@ -21,3 +25,20 @@ export class HandleableBuilder extends ExtensibleComponent {
     return 'HandleableBuilder'
   }
 }
+
+const wrapHandleableBuilderFn = builder => {
+  assertFunction(builder)
+
+  return async function(config) {
+    const handleable = await builder(config)
+
+    if(!handleable)
+      throw new TypeError('user defined handleable builder function ' +
+        'must return handleable object')
+
+    return handleable
+  }
+}
+
+export const handleableBuilder = implComponentConstructor(
+  HandleableBuilder, 'mainHandleableBuilderFn', wrapHandleableBuilderFn)

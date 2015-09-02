@@ -11,7 +11,7 @@ const subComponentNode = function() {
 }
 
 export class Component {
-  constructor(opts={}) {
+  constructor() {
     this[$self] = this
   }
 
@@ -48,7 +48,7 @@ export class Component {
   }
 
   subComponents() {
-    this::subComponentNode().subNodes()
+    return this::subComponentNode().subNodes()
       ::map(node => node.transpose())
   }
 

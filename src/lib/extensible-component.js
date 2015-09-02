@@ -1,50 +1,36 @@
-import { ListNode } from 'quiver-graph'
-import { map } from 'quiver-util/iterator'
-
 import { Component } from './component'
-import {
-  combineMiddlewares, assertIsMiddlewareComponent 
-} from 'quiver-component-util'
+import { MiddlewareList } from './middleware-list'
 
-const middlewareNode = function() {
-  return this.graph.getNode('middlewares')
+const $extendMiddleware = Symbol('@extendMiddleware')
+
+const middlewareList = function() {
+  return this.getSubComponent($extendMiddleware)
 }
 
 export class ExtensibleComponent extends Component {
   activate() {
     const component = super.activate()
-    component.graph.setNode('middlewares', new ListNode())
+    component.setSubComponent($extendMiddleware,
+      new MiddlewareList().activate())
+
     return component
   }
 
   addMiddleware(middleware) {
-    assertIsMiddlewareComponent(middleware)
-    this::middlewareNode().appendNode(middleware.graph)
-
+    this::middlewareList().addMiddleware(middleware)
     return this
   }
 
   prependMiddleware(middleware) {
-    assertIsMiddlewareComponent(middleware)
-    this::middlewareNode().prependNode(middleware.graph)
-
+    this::middlewareList().prependMiddleware(middleware)
     return this
   }
 
   middlewareComponents() {
-    return this::middlewareNode().subNodes()
-      ::map(node => node.transpose())
-  }
-
-  *subComponents() {
-    yield* this.middlewareComponents()
-    yield* super.subComponents()
+    return this::middlewareList().middlewareComponents()
   }
 
   extendMiddlewareFn() {
-    const middlewareFns = this.middlewareComponents()
-      ::map(component => component.handleableMiddlewareFn())
-
-    return combineMiddlewares([...middlewareFns])
+    return this::middlewareList().handleableMiddlewareFn()
   }
 }
