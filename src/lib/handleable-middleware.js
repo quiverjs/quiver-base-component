@@ -1,16 +1,15 @@
 import { assertFunction } from 'quiver-util/assert'
 import { ExtensibleComponent } from './extensible-component'
 
-import {
-  combineMiddlewares, implComponentConstructor
-} from 'quiver-component-util'
+import { combineTwoMiddlewares } from './util/combinator'
+import { componentConstructor } from './util/constructor'
 
 export class HandleableMiddleware extends ExtensibleComponent {
   handleableMiddlewareFn() {
     const mainMiddleware = this.mainHandleableMiddlewareFn()
     const extendMiddleware = this.extendMiddlewareFn()
 
-    return combineMiddlewares([mainMiddleware, extendMiddleware])
+    return combineTwoMiddlewares(mainMiddleware, extendMiddleware)
   }
 
   mainHandleableMiddlewareFn() {
@@ -40,5 +39,5 @@ const wrapHandleableMiddlewareFn = middleware => {
   }
 }
 
-export const handleableMiddleware = implComponentConstructor(
+export const handleableMiddleware = componentConstructor(
   HandleableMiddleware, 'mainHandleableMiddlewareFn', wrapHandleableMiddlewareFn)

@@ -1,10 +1,10 @@
 import { map } from 'quiver-util/iterator'
 import { deepClone } from 'quiver-graph/util'
 import { MapNode, MapNodeWithElement } from 'quiver-graph'
-import { assertIsComponent, assertIsActivated } from 'quiver-component-util'
+import { assertIsComponent, assertIsActivated } from './util/assert'
 
 const $self = Symbol('@self')
-const $subComponents = Symbol.for('@quiver.graph.subComponents')
+const $subComponents = Symbol('@subComponents')
 
 const subComponentNode = function() {
   return this.graph.getNode($subComponents)

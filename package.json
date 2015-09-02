@@ -14,8 +14,7 @@
   "dependencies": {
     "quiver-util": "~1.0.0",
     "quiver-graph": "~1.0.0",
-    "babel-runtime": "^5.8.20",
-    "quiver-component-util": "quiverjs/quiver-component-util"
+    "babel-runtime": "^5.8.20"
   },
   "devDependencies": {
     "tape": "^4.0.1",

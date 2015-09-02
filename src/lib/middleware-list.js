@@ -2,9 +2,8 @@ import { ListNode } from 'quiver-graph'
 import { map } from 'quiver-util/iterator'
 
 import { Component } from './component'
-import {
-  combineMiddlewares, assertIsMiddlewareComponent
-} from 'quiver-component-util'
+import { combineMiddlewares } from './util/combinator'
+import { assertIsMiddlewareComponent } from './util/assert'
 
 const $middlewares = Symbol('@middlewares')
 
