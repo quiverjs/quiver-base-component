@@ -12,7 +12,7 @@
     "url": "git@github.com:quiverjs/quiver-component-base.git"
   },
   "dependencies": {
-    "quiver-util": "~1.0.0",
+    "quiver-util": "~1.0.4",
     "quiver-graph": "~1.0.0",
     "babel-runtime": "^5.8.20"
   },
@@ -28,10 +28,9 @@
   "main": "./index.js",
   "scripts": {
     "test": "make test",
-    "prepublish": "make build",
-    "postinstall": "make postinstall"
+    "prepublish": "make build"
   },
   "engines": {
-    "iojs": "^3.2.0"
+    "node": "^4.0.0"
   }
 }

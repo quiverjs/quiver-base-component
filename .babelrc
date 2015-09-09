@@ -8,6 +8,7 @@
   ],
   "blacklist": [
     "es6.properties.computed",
+    "es6.arrowFunctions",
     "es6.blockScoping",
     "es6.constants",
     "es6.forOf",

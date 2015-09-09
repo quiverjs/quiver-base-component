@@ -1,4 +1,6 @@
 import { assertFunction } from 'quiver-util/assert'
+import { isImmutableMap } from 'quiver-util/immutable'
+
 import { ExtensibleComponent } from './extensible-component'
 
 import { combineBuilderWithMiddleware } from './util/combinator'
@@ -31,9 +33,9 @@ const wrapHandleableBuilderFn = builder => {
   return async function(config) {
     const handleable = await builder(config)
 
-    if(!handleable)
+    if(!isImmutableMap(handleable))
       throw new TypeError('user defined handleable builder function ' +
-        'must return handleable object')
+        'must return handleable as immutable map')
 
     return handleable
   }
