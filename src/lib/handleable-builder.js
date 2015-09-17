@@ -3,8 +3,9 @@ import { isImmutableMap } from 'quiver-util/immutable'
 
 import { ExtensibleComponent } from './extensible-component'
 
-import { combineBuilderWithMiddleware } from './util/combinator'
+import { loadHandleable } from './util/loader'
 import { componentConstructor } from './util/constructor'
+import { combineBuilderWithMiddleware } from './util/combinator'
 
 export class HandleableBuilder extends ExtensibleComponent {
   handleableBuilderFn() {
@@ -16,6 +17,10 @@ export class HandleableBuilder extends ExtensibleComponent {
 
   mainHandleableBuilderFn() {
     throw new Error('abstract method is not implemented')
+  }
+
+  loaderFn() {
+    return loadHandleable
   }
 
   get isHandlerComponent() {

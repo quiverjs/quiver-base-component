@@ -1,7 +1,10 @@
 import { ImmutableMap } from 'quiver-util/immutable'
 
-export const createConfig = () => {
-  return ImmutableMap().set('global', new Map())
+export const createConfig = (opts) => {
+  const config = ImmutableMap(opts)
+  if(config.has('global')) return config
+
+  return config.set('global', new Map())
 }
 
 export const assertConfig = config => {

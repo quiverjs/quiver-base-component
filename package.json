@@ -6,7 +6,7 @@
   },
   "name": "quiver-component-base",
   "desription": "Base Quiver component system",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://github.com/quiverjs/quiver-component-base",
   "repository": {
     "url": "git@github.com:quiverjs/quiver-component-base.git"
