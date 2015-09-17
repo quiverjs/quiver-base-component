@@ -12,7 +12,7 @@
     "url": "git@github.com:quiverjs/quiver-component-base.git"
   },
   "dependencies": {
-    "quiver-util": "~1.0.4",
+    "quiver-util": "~1.1.0",
     "quiver-graph": "~1.0.0",
     "babel-runtime": "^5.8.20"
   },

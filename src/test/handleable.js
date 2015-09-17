@@ -36,6 +36,8 @@ test('integrated handleable builder+middleware component test', assert => {
 
     assert.equal(handleable.get('foo'), 'food')
     assert.equal(handleable.get('bar'), 'beer')
+
+    assert.end()
   })
 
   assert.end()
