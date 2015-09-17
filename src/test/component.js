@@ -15,7 +15,7 @@ test('Component basic test', assert => {
   assert.ok(component.graph)
   assert.ok(component.graphNode)
   assert.equal(component.graphElement, rawComponent)
-  assert.equal(component.rawSelf, rawComponent)
+  assert.equal(component.rawComponent, rawComponent)
 
   assert.throws(() =>
     component.setSubComponent('foo', 'not a component'),
@@ -53,7 +53,7 @@ test('Component basic test', assert => {
   assert.equal(component2.name, 'MyCustomizedComponent')
   assert.equal(component.name, 'MyComponent')
 
-  assert.equal(component2.rawSelf, rawComponent)
+  assert.equal(component2.rawComponent, rawComponent)
   assert.equal(component2.graphElement, rawComponent)
 
   assert.end()

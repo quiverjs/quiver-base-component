@@ -1,5 +1,5 @@
 export const componentConstructor = (Component, method, wrapper) =>
-  (implFn, options={}) => {
+  (implFn, options) => {
     const component = new Component(options)
     const wrapped = wrapper(implFn)
 

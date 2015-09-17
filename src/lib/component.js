@@ -24,7 +24,7 @@ export class Component {
     return this.graphNode
   }
 
-  get rawSelf() {
+  get rawComponent() {
     return this[$self]
   }
 
