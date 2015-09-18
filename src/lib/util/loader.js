@@ -16,6 +16,7 @@ export const getHandlerMap = config => {
 }
 
 export const loadHandleable = async function(config, id, builder) {
+  assertConfig(config)
   const handlerMap = getHandlerMap(config)
 
   if(handlerMap.has(id))
