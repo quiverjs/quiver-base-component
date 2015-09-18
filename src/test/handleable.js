@@ -3,7 +3,7 @@ import test from 'tape'
 import { asyncTest } from 'quiver-util/tape'
 import { ImmutableMap } from 'quiver-util/immutable'
 
-import { createConfig } from '../lib/util'
+import { createConfig, loadHandler } from '../lib/util'
 
 import {
   handleableBuilder, handleableMiddleware
@@ -31,8 +31,8 @@ test('integrated handleable builder+middleware component test', assert => {
   async function(assert) {
     const resultBuilder = main.handleableBuilderFn()
 
-    const config = createConfig().set('nextCalled', 'bar')
-    const handleable = await resultBuilder(config)
+    const config = createConfig({ nextCalled: 'bar' })
+    const handleable = await loadHandler(config, main)
 
     assert.equal(handleable.get('foo'), 'food')
     assert.equal(handleable.get('bar'), 'beer')

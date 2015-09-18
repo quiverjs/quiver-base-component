@@ -16,7 +16,7 @@ export class HandleableBuilder extends ExtensibleComponent {
   }
 
   mainHandleableBuilderFn() {
-    throw new Error('abstract method is not implemented')
+    throw new Error('abstract method mainHandleableBuilderFn() is not implemented')
   }
 
   loaderFn() {
@@ -39,8 +39,7 @@ const wrapHandleableBuilderFn = builder => {
     const handleable = await builder(config)
 
     if(!isImmutableMap(handleable))
-      throw new TypeError('user defined handleable builder function ' +
-        'must return handleable as immutable map')
+      throw new TypeError('returned handleable must be ImmutableMap')
 
     return handleable
   }

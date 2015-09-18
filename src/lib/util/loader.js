@@ -30,3 +30,13 @@ export const loadHandleable = async function(config, id, builder) {
 
   return handleable
 }
+
+export const bindLoader = (component, loader) => {
+  const id = component.id
+  const builder = component.handleableBuilderFn()
+
+  return config => loader(config, id, builder)
+}
+
+export const loadHandler = (config, component) =>
+  bindLoader(component, component.loaderFn())(config)
