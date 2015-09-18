@@ -3,7 +3,7 @@ import { isImmutableMap } from 'quiver-util/immutable'
 
 import { ExtensibleComponent } from './extensible-component'
 
-import { loadHandleable } from './util/loader'
+import { handleableLoader } from './util/loader'
 import { componentConstructor } from './util/constructor'
 import { combineBuilderWithMiddleware } from './util/combinator'
 
@@ -20,7 +20,7 @@ export class HandleableBuilder extends ExtensibleComponent {
   }
 
   loaderFn() {
-    return loadHandleable
+    return handleableLoader
   }
 
   get isHandlerComponent() {

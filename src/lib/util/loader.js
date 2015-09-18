@@ -32,6 +32,8 @@ export const loadHandleable = async function(config, id, builder) {
   return handleable
 }
 
+export const handleableLoader = loadHandleable
+
 export const bindLoader = (component, loader) => {
   const id = component.id
   const builder = component.handleableBuilderFn()
@@ -39,5 +41,6 @@ export const bindLoader = (component, loader) => {
   return config => loader(config, id, builder)
 }
 
-export const loadHandler = (config, component) =>
-  bindLoader(component, component.loaderFn())(config)
+export const loadHandler = function(config, component, loader=component.loaderFn()) {
+  return bindLoader(component, loader)(config)
+}
