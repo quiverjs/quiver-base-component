@@ -1,4 +1,6 @@
 import test from 'tape'
+import { ImmutableMap } from 'quiver-util/immutable'
+
 import { Component } from '../lib'
 
 test('Component basic test', assert => {
@@ -55,6 +57,32 @@ test('Component basic test', assert => {
 
   assert.equal(component2.rawComponent, rawComponent)
   assert.equal(component2.graphElement, rawComponent)
+
+  assert.end()
+})
+
+test('initComponent and export', assert => {
+  const fooComponent = new Component().activate()
+    .setName('foo')
+
+  const barRawComponent = new Component({
+    initComponents: ImmutableMap({ foo: fooComponent })
+  })
+
+  assert.throws(() => barRawComponent.getSubComponent('foo'))
+
+  const barComponent = barRawComponent.activate()
+  assert.equal(barComponent.getSubComponent('foo'), fooComponent)
+
+  const createBar = barComponent.export()
+  const barComponent2 = createBar()
+
+  assert.notEqual(barComponent2, barComponent)
+  assert.notEqual(barComponent2.id, barComponent.id)
+
+  const fooComponent2 = barComponent2.getSubComponent('foo')
+  assert.notEqual(fooComponent2, fooComponent)
+  assert.notEqual(fooComponent2.id, fooComponent.id)
 
   assert.end()
 })

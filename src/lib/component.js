@@ -1,22 +1,29 @@
 import { map } from 'quiver-util/iterator'
+import { ImmutableMap, isImmutableMap } from 'quiver-util/immutable'
+
 import { deepClone } from 'quiver-graph/util'
 import { MapNode, MapNodeWithElement } from 'quiver-graph'
-import { assertIsComponent, assertIsActivated } from './util/assert'
+import {
+  assertIsActiveComponent, assertIsActivated, assertIsNotActivated
+} from './util/assert'
 
 const $self = Symbol('@self')
 const $subComponents = Symbol('@subComponents')
+const $initComponents = Symbol('@initComponents')
 
 const subComponentNode = function() {
   return this.graph.getNode($subComponents)
 }
 
 export class Component {
-  constructor() {
-    this[$self] = this
-  }
+  constructor(options={}) {
+    const { initComponents = ImmutableMap() } = options
 
-  get isQuiverComponent() {
-    return true
+    if(!isImmutableMap(initComponents))
+      throw new TypeError('options.initComponents must be ImmutableMap')
+
+    this[$self] = this
+    this[$initComponents] = initComponents
   }
 
   get graph() {
@@ -33,12 +40,20 @@ export class Component {
   }
 
   activate() {
+    assertIsNotActivated(this)
+
     const node = new MapNodeWithElement({
       element: this
     })
 
     node.setNode($subComponents, new MapNode())
-    return node.transpose()
+    const component = node.transpose()
+
+    for(let [key, subComponent] of this[$initComponents].entries()) {
+      component.setSubComponent(key, subComponent)
+    }
+
+    return component
   }
 
   export() {
@@ -58,7 +73,8 @@ export class Component {
   }
 
   setSubComponent(name, component) {
-    assertIsComponent(component)
+    assertIsActiveComponent(component)
+
     this::subComponentNode().setNode(name, component.graph)
     return this
   }
@@ -88,5 +104,13 @@ export class Component {
   setNamespace(namespace) {
     this.setMeta('namespace', namespace)
     return this
+  }
+
+  get isQuiverComponent() {
+    return true
+  }
+
+  get componentType() {
+    return 'Component'
   }
 }
