@@ -41,6 +41,10 @@ export const bindLoader = (component, loader) => {
   return config => loader(config, id, builder)
 }
 
-export const loadHandler = function(config, component, loader=component.loaderFn()) {
+export const loadHandler = function(config, component, options={}) {
+  const {
+    loader=component.handlerLoader
+  } = options
+
   return bindLoader(component, loader)(config)
 }

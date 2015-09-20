@@ -64,11 +64,11 @@ export class Component {
   }
 
   getMeta(key) {
-    return this.graph.meta.get(key)
+    return this.graph.getMeta(key)
   }
 
   setMeta(key, value) {
-    this.graph.meta.set(key, value)
+    this.graph.setMeta(key, value)
     return this
   }
 

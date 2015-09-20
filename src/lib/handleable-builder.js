@@ -7,6 +7,8 @@ import { handleableLoader } from './util/loader'
 import { componentConstructor } from './util/constructor'
 import { combineBuilderWithMiddleware } from './util/combinator'
 
+const $handlerLoader = Symbol('@handlerLoader')
+
 export class HandleableBuilder extends ExtensibleComponent {
   handleableBuilderFn() {
     const mainBuilder = this.mainHandleableBuilderFn()
@@ -19,8 +21,22 @@ export class HandleableBuilder extends ExtensibleComponent {
     throw new Error('abstract method mainHandleableBuilderFn() is not implemented')
   }
 
-  loaderFn() {
+  get handlerLoader() {
+    const loader = this.getMeta($handlerLoader)
+    if(loader) return loader
+
+    return this.defaultLoader
+  }
+
+  get defaultLoader() {
     return handleableLoader
+  }
+
+  setLoader(loader) {
+    assertFunction(loader)
+    this.setMeta($handlerLoader, loader)
+
+    return this
   }
 
   get isHandlerComponent() {
