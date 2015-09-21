@@ -1,4 +1,4 @@
-import { ImmutableMap } from 'quiver-util/immutable'
+import { ImmutableMap, isImmutableMap } from 'quiver-util/immutable'
 
 export const createConfig = (opts) => {
   const config = ImmutableMap(opts)
@@ -8,7 +8,7 @@ export const createConfig = (opts) => {
 }
 
 export const assertConfig = config => {
-  if(!ImmutableMap.isMap(config))
+  if(!isImmutableMap(config))
     throw new TypeError('config must be instance of immutable map')
 
   if(!config.get('global'))

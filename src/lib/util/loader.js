@@ -46,5 +46,8 @@ export const loadHandler = function(config, component, options={}) {
     loader=component.handlerLoader
   } = options
 
-  return bindLoader(component, loader)(config)
+  const id = component.id
+  const builder = component.handleableBuilderFn()
+
+  return loader(config, id, builder, options)
 }
