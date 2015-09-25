@@ -3,11 +3,9 @@ import { ImmutableMap, isImmutableMap } from 'quiver-util/immutable'
 
 import { deepClone } from 'quiver-graph/util'
 import { MapNode, MapNodeWithElement } from 'quiver-graph'
-import {
-  assertIsActiveComponent, assertIsActivated, assertIsNotActivated
-} from './util/assert'
+import { assertComponent } from './util/assert'
 
-const $self = Symbol('@self')
+const $rawComponent = Symbol('@rawComponent')
 const $subComponents = Symbol('@subComponents')
 const $initComponents = Symbol('@initComponents')
 
@@ -16,31 +14,8 @@ const subComponentNode = function() {
 }
 
 export class Component {
-  constructor(options={}) {
-    const { initComponents = ImmutableMap() } = options
-
-    if(!isImmutableMap(initComponents))
-      throw new TypeError('options.initComponents must be ImmutableMap')
-
-    this[$self] = this
-    this[$initComponents] = initComponents
-  }
-
-  get graph() {
-    assertIsActivated(this)
-    return this.graphNode
-  }
-
-  get rawComponent() {
-    return this[$self]
-  }
-
-  get id() {
-    return this.graph.id
-  }
-
-  activate() {
-    assertIsNotActivated(this)
+  constructor(options) {
+    this[$rawComponent] = this
 
     const node = new MapNodeWithElement({
       element: this
@@ -49,15 +24,22 @@ export class Component {
     node.setNode($subComponents, new MapNode())
     const component = node.transpose()
 
-    for(let [key, subComponent] of this[$initComponents].entries()) {
-      component.setSubComponent(key, subComponent)
-    }
-
     return component
   }
 
+  get graph() {
+    return this.graphNode
+  }
+
+  get rawComponent() {
+    return this[$rawComponent]
+  }
+
+  get id() {
+    return this.graph.id
+  }
+
   export() {
-    assertIsActivated(this)
     return () =>
       deepClone(this.graph).transpose()
   }
@@ -72,10 +54,10 @@ export class Component {
     return node ? node.transpose() : null
   }
 
-  setSubComponent(name, component) {
-    assertIsActiveComponent(component)
+  setSubComponent(name, subComponent) {
+    assertComponent(subComponent)
 
-    this::subComponentNode().setNode(name, component.graph)
+    this::subComponentNode().setNode(name, subComponent.graph)
     return this
   }
 

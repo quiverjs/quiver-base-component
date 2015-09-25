@@ -3,7 +3,7 @@ import { map } from 'quiver-util/iterator'
 
 import { Component } from './component'
 import { combineMiddlewares } from './util/combinator'
-import { assertIsMiddlewareComponent } from './util/assert'
+import { assertMiddlewareComponent } from './util/assert'
 
 const $middlewares = Symbol('@middlewares')
 
@@ -12,21 +12,21 @@ const middlewareNode = function() {
 }
 
 export class MiddlewareList extends Component {
-  activate() {
-    const component = super.activate()
-    component.graph.setNode($middlewares, new ListNode())
-    return component
+  constructor(options) {
+    super(options)
+
+    this.graph.setNode($middlewares, new ListNode())
   }
 
   addMiddleware(middleware) {
-    assertIsMiddlewareComponent(middleware)
+    assertMiddlewareComponent(middleware)
     this::middlewareNode().appendNode(middleware.graph)
 
     return this
   }
 
   prependMiddleware(middleware) {
-    assertIsMiddlewareComponent(middleware)
+    assertMiddlewareComponent(middleware)
     this::middlewareNode().prependNode(middleware.graph)
 
     return this

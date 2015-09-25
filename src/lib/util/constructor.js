@@ -3,8 +3,8 @@ export const componentConstructor = (Component, method, wrapper) =>
     const component = new Component(options)
     const wrapped = wrapper(implFn)
 
-    component[method] = () => wrapped
-    component.implFunc = implFn
+    component.rawComponent[method] = () => wrapped
+    component.rawComponent.implFunc = implFn
 
-    return component.activate()
+    return component
   }

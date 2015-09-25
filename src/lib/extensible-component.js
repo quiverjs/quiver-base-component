@@ -8,12 +8,10 @@ const middlewareList = function() {
 }
 
 export class ExtensibleComponent extends Component {
-  activate() {
-    const component = super.activate()
-    component.setSubComponent($extendMiddleware,
-      new MiddlewareList().activate())
+  constructor(options) {
+    super(options)
 
-    return component
+    this.setSubComponent($extendMiddleware, new MiddlewareList())
   }
 
   addMiddleware(middleware) {
