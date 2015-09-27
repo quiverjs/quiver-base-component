@@ -1,5 +1,4 @@
 import test from 'tape'
-import { ImmutableMap } from 'quiver-util/immutable'
 
 import { Component } from '../lib'
 import { allSubComponents } from '../lib/util'

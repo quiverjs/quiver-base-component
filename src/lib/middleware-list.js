@@ -4,12 +4,6 @@ import { ListComponent } from './list'
 import { combineMiddlewares } from './util/combinator'
 import { assertMiddlewareComponent } from './util/assert'
 
-const $middlewares = Symbol('@middlewares')
-
-const middlewareNode = function() {
-  return this.graph.getNode($middlewares)
-}
-
 export class MiddlewareList extends ListComponent {
   addMiddleware(middleware) {
     assertMiddlewareComponent(middleware)
@@ -22,7 +16,7 @@ export class MiddlewareList extends ListComponent {
   }
 
   middlewareComponents() {
-    return this.componentList()
+    return this.subComponents()
   }
 
   handleableMiddlewareFn() {

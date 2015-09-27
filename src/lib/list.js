@@ -1,20 +1,20 @@
 import { ListNode } from 'quiver-graph'
 import { map } from 'quiver-util/iterator'
 
-import { Component } from './component'
+import { ComponentBase } from './base'
 import { assertComponent } from './util/assert'
 
-const $components = Symbol('@components')
+const $subComponents = Symbol('@subComponents')
 
 const listNode = function() {
-  return this.graph.getNode($components)
+  return this.graph.getNode($subComponents)
 }
 
-export class ListComponent extends Component {
+export class ListComponent extends ComponentBase {
   constructor(options) {
     super(options)
 
-    this.graph.setNode($components, new ListNode())
+    this.graph.setNode($subComponents, new ListNode())
   }
 
   appendComponent(component) {
@@ -31,14 +31,9 @@ export class ListComponent extends Component {
     return this
   }
 
-  componentList() {
+  subComponents() {
     return this::listNode().subNodes()
       ::map(node => node.transpose())
-  }
-
-  *subComponents() {
-    yield* this.componentList()
-    yield* super.subComponents()
   }
 
   get componentType() {
