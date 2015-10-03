@@ -4,6 +4,8 @@ export { Component } from './component'
 
 export { ListComponent } from './list'
 
+export { MapComponent } from './map'
+
 export { ExtensibleComponent } from './extensible-component'
 
 export { HandleableBuilder } from './handleable-builder'

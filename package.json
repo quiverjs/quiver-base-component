@@ -6,14 +6,14 @@
   },
   "name": "quiver-component-base",
   "desription": "Base Quiver component system",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "homepage": "https://github.com/quiverjs/quiver-component-base",
   "repository": {
     "url": "git@github.com:quiverjs/quiver-component-base.git"
   },
   "dependencies": {
     "quiver-util": "~1.1.0",
-    "quiver-graph": "~1.1.1",
+    "quiver-graph": "~1.1.2",
     "babel-runtime": "^5.8.20"
   },
   "devDependencies": {

@@ -26,6 +26,10 @@ export class ComponentBase {
     return this.graph.id
   }
 
+  *subComponents() {
+    // no subcomponent in base
+  }
+
   export() {
     return () =>
       deepClone(this.graph).transpose()
