@@ -1,7 +1,7 @@
 import test from 'tape'
 
 import { Component } from '../lib'
-import { allSubComponents } from '../lib/util'
+import { allSubComponents } from '../lib/method'
 
 test('Component basic test', assert => {
   assert.test('basic component behavior', assert => {
@@ -33,34 +33,6 @@ test('Component basic test', assert => {
     assert.end()
   })
 
-  assert.test('export component', assert => {
-    const component = new Component()
-      .setName('MyComponent')
-
-    const fooComponent = new Component()
-    component.setSubComponent('foo', fooComponent)
-
-    const makeComponent = component.export()
-    const component2 = makeComponent()
-
-    assert.notEqual(component2, component)
-    assert.equal(component2.name, 'MyComponent')
-    assert.notEqual(component2.getSubComponent('foo'), fooComponent)
-
-    const barComponent = new Component()
-    component2.setSubComponent('bar', barComponent)
-    assert.equal(component2.getSubComponent('bar'), barComponent)
-    assert.equal(component.getSubComponent('bar'), null)
-
-    component2.setName('MyCustomizedComponent')
-    assert.equal(component2.name, 'MyCustomizedComponent')
-    assert.equal(component.name, 'MyComponent')
-
-    assert.equal(component2.rawComponent, component.rawComponent)
-
-    assert.end()
-  })
-
   assert.test('all subcomponents', assert => {
     const foo = new Component()
     const baz = new Component()
@@ -74,7 +46,7 @@ test('Component basic test', assert => {
 
     foo.setSubComponent('main', main)
 
-    const subComponents = [...allSubComponents(main)]
+    const subComponents = [...main::allSubComponents()]
     assert.deepEqual(subComponents, [main, foo, bar, baz])
 
     assert.end()

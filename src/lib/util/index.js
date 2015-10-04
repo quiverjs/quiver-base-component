@@ -16,7 +16,7 @@ export {
 } from './handleable'
 
 export {
-  allSubComponents
+  allSubComponents, innerComponents
 } from './iterate'
 
 export {

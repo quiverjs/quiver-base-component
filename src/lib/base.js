@@ -1,5 +1,7 @@
-import { deepClone } from 'quiver-graph/util'
+import { deepClone, deepFreeze } from 'quiver-graph/util'
 import { MapNodeWithElement } from 'quiver-graph'
+
+import { allSubComponents } from './util/iterate'
 
 const $rawComponent = Symbol('@rawComponent')
 
@@ -30,9 +32,19 @@ export class ComponentBase {
     // no subcomponent in base
   }
 
-  export() {
+  export(namespace = Symbol('@anonymous')) {
+    const currentNamespace = this.namespace
+
+    for(let component of allSubComponents(this)) {
+      if(component.namespace === currentNamespace)
+      component.setNamespace(namespace)
+    }
+
+    const { graph } = this
+    deepFreeze(graph)
+
     return () =>
-      deepClone(this.graph).transpose()
+      deepClone(graph).transpose()
   }
 
   getMeta(key) {
