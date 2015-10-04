@@ -48,7 +48,7 @@ test('export component test', assert => {
       .setSubComponent('burger', burger)
       .setSubComponent('pasta', pasta)
 
-    const innerComponentNames = function(namespace) {
+    const innerComponentNames = function() {
       return [...this::innerComponents()
         ::map(component => component.name)]
     }

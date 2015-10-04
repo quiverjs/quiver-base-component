@@ -24,3 +24,5 @@ export {
   handleableLoader, bindLoader,
   loadHandler
 } from './loader'
+
+export { mapComponent } from './map'

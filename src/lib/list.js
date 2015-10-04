@@ -14,7 +14,10 @@ export class ListComponent extends ComponentBase {
   constructor(options) {
     super(options)
 
-    this.graph.setNode($subComponents, new ListNode())
+    const listNode = new ListNode()
+    listNode.setMeta('isComponentNode', true)
+
+    this.graph.setNode($subComponents, listNode)
   }
 
   appendComponent(component) {

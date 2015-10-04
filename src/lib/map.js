@@ -14,7 +14,10 @@ export class MapComponent extends ComponentBase {
   constructor(options) {
     super(options)
 
-    this.graph.setNode($subComponents, new MapNode())
+    const mapNode = new MapNode()
+    mapNode.setMeta('isComponentNode', true)
+
+    this.graph.setNode($subComponents, mapNode)
   }
 
   getComponent(name) {
