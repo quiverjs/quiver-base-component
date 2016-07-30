@@ -4,7 +4,8 @@ export {
 } from './assert'
 
 export {
-  createConfig, assertConfig
+  createConfig, createConfig as Config,
+  assertConfig
 } from './config'
 
 export {
@@ -20,8 +21,7 @@ export {
 } from './iterate'
 
 export {
-  getHandlerMap, loadHandleable,
-  handleableLoader, bindLoader,
+  getHandlerMap, handleableLoader, bindLoader,
   loadHandler
 } from './loader'
 

@@ -4,7 +4,7 @@ import { asyncTest } from 'quiver-util/tape'
 import { ImmutableMap } from 'quiver-util/immutable'
 
 import {
-  createConfig, loadHandler, loadHandleable, getHandlerMap
+  Config, loadHandler, handleableLoader, getHandlerMap
 } from '../lib/util'
 
 import {
@@ -31,7 +31,7 @@ test('integrated handleable builder+middleware component test', assert => {
 
   assert::asyncTest('builder function should built with middleware',
   async function(assert) {
-    const config = createConfig({ nextCalled: 'bar' })
+    const config = Config({ nextCalled: 'bar' })
     const handleable = await loadHandler(config, main)
 
     assert.equal(handleable.get('foo'), 'food')
@@ -45,7 +45,7 @@ test('integrated handleable builder+middleware component test', assert => {
       'repeated loading should return same instance')
 
     const fooLoader = async function(config, component, options) {
-      const handleable = await loadHandleable(config, component, options)
+      const handleable = await handleableLoader(config, component, options)
       return handleable.get('foo')
     }
 

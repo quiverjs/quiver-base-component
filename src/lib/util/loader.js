@@ -15,7 +15,7 @@ export const getHandlerMap = config => {
   return handlerMap
 }
 
-export const loadHandleable = async function(config, id, builder) {
+export const handleableLoader = async function(config, id, builder) {
   assertConfig(config)
   const handlerMap = getHandlerMap(config)
 
@@ -31,8 +31,6 @@ export const loadHandleable = async function(config, id, builder) {
 
   return handleable
 }
-
-export const handleableLoader = loadHandleable
 
 export const bindLoader = function(component, loader=component.handlerLoader) {
   const id = component.id
