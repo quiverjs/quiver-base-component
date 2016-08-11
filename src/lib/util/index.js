@@ -13,7 +13,8 @@ export {
 } from './constructor'
 
 export {
-  createHandleable, assertHandleable
+  createHandleable, createHandleable as Handleable,
+  assertHandleable
 } from './handleable'
 
 export {
